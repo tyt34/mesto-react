@@ -14,13 +14,15 @@ import Api from '../utils/Api'
 
 
 function Main(props) {
-  console.log('main props -> ', props)
+  //console.log('main props -> ', props)
   const [userName, setUserName] = React.useState('Загрузка...')
   const [userDescription, setUserDescription] = React.useState('Загрузка...')
   const [userAvatar, setUserAvatar] = React.useState(profile__img)
 
+  const [cards, setCards] = React.useState([])
+
   React.useEffect( () => {
-    console.log(' M M ount ')
+    //console.log(' M M ount ')
     Api.getNowData().then( data => {
       //console.log(data)
       //return data
@@ -31,6 +33,12 @@ function Main(props) {
       //userDescription = data.about
       //userAvatar = data.avatar
     })
+    /*
+    Api.getCardsFromServer().then( data => {
+      console.log(data)
+      setCards(data)
+    })
+    */
     //profile__img = userAvatar
   }, [])
 
@@ -40,7 +48,7 @@ function Main(props) {
 
 
 
-  console.log(' 1) ',userName,' 2) ',userDescription,' 3) ',userAvatar)
+  //console.log(' 1) ',userName,' 2) ',userDescription,' 3) ',userAvatar)
   //console.log(Api)
 
   return (

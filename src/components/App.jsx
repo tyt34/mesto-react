@@ -3,6 +3,10 @@ import logo from './images/logo.svg'
 import React from 'react'
 import PopupWithForm from './PopupWithForm.jsx'
 import Main from './Main.jsx'
+import Api from '../utils/Api'
+import Card from './Card.jsx'
+import ImagePopup from './ImagePopup.jsx'
+
 
 //import profile__img from './images/load.gif'
 //import profile__img from './images/logo.png'
@@ -12,6 +16,21 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
 
+  const [cards, setCards] = React.useState([])
+
+  const [selectedCard, setSelectedCard] = React.useState(false)
+
+
+  React.useEffect( () => {
+    console.log(' MMMoount ')
+    Api.getCardsFromServer().then( data => {
+      console.log(data[0])
+      setCards(data)
+    })
+    //profile__img = userAvatar
+  }, [])
+
+  /*
   React.useEffect( () => {
     console.log(' MOUNT ')
     const buttonAddOpen  = document.querySelector('.profile-char__add')
@@ -53,6 +72,7 @@ function App() {
     })
 
   })
+  */
 
   function handleEditAvatarClick() {
     console.log(' -1- ')
@@ -73,7 +93,19 @@ function App() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
+
+    setSelectedCard(false)
   }
+
+  function handleCardClick() {
+    setSelectedCard(true)
+  }
+
+  /*
+  <ul className="...">
+          {cards.map((card) => <Card key={card._id} card={card} onCardClick={....} />)}
+  </ul>
+  */
 
   return (
     <>
@@ -85,25 +117,21 @@ function App() {
         </div>
       </div>
 
-      <template className="template">
-        <article className="place">
-          <img className="place__img" src={logo} alt="Test" />
-          <button className="place__del" type="button"></button>
-          <div className="place__option">
-              <h2 className="place__title">Test</h2>
-              <div className="place__like-container">
-                <button className="place__like" type="button"></button>
-                <p className="place__num">0</p>
-              </div>
-          </div>
-        </article>
-      </template>
+
 
       <Main
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
       />
+
+      <section className="places">
+        {
+          cards.map( (card) => <Card key={card._id} name={card.name} img={card.link} likes={card.likes}  />)
+        }
+      </section>
+
+      <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} />
 
       <PopupWithForm
         name={'avatar'}
