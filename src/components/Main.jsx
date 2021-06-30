@@ -1,55 +1,27 @@
-//import './App.css';
-//import logo from './images/logo.svg'
-//import profile__img from './images/load.gif'
-//import ReactDom from 'react-dom'
-
-//import profile__img from './images/logo.png'
 import profile__img from './images/load.gif'
 import React from 'react'
-
-//import './Test.css';
-//import Test from './test.jsx'
-import PopupWithForm from './PopupWithForm.jsx'
 import Api from '../utils/Api'
+import Card from './Card.jsx'
+
 
 
 function Main(props) {
-  //console.log('main props -> ', props)
   const [userName, setUserName] = React.useState('Загрузка...')
   const [userDescription, setUserDescription] = React.useState('Загрузка...')
   const [userAvatar, setUserAvatar] = React.useState(profile__img)
-
   const [cards, setCards] = React.useState([])
 
   React.useEffect( () => {
-    //console.log(' M M ount ')
     Api.getNowData().then( data => {
-      //console.log(data)
-      //return data
       setUserName(data.name)
       setUserDescription(data.about)
       setUserAvatar(data.avatar)
-      //profile__img = userAvatar
-      //userDescription = data.about
-      //userAvatar = data.avatar
     })
-    /*
+
     Api.getCardsFromServer().then( data => {
-      console.log(data)
       setCards(data)
     })
-    */
-    //profile__img = userAvatar
   }, [])
-
-  //let userName
-  //let userDescription
-  //let userAvatar
-
-
-
-  //console.log(' 1) ',userName,' 2) ',userDescription,' 3) ',userAvatar)
-  //console.log(Api)
 
   return (
       <main>
@@ -87,8 +59,11 @@ function Main(props) {
             </button>
           </div>
         </section>
-        <section className="places">
 
+        <section className="places">
+          {
+            cards.map( (card) => <Card key={card._id} name={card.name} img={card.link} likes={card.likes}  />)
+          }
         </section>
     </main>
   )

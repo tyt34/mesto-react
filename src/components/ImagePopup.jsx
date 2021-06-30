@@ -1,16 +1,20 @@
 import React from 'react'
 
-function ImagePopup(props) {
+function ImagePopup({card, onClose}) {
+  function createAltImg(specialWord) {
+    return 'Изображение места: "'+specialWord+'"'
+  }
+
   return (
-    <div id="popup-img" className={ props.isOpen ? 'popup-img popup popup_open' : 'popup-img popup'}>
-      <div className="popup-img__container">
-
-        <img className="popup-img__img" alt="Test" src="images/logo.abb64ac93f95638a2598.svg" />
-
-        <p className="popup-img__title">Test</p>
-        <button id="popup-img__close" className="popup__close" onClick={props.onClose}></button>
+    <>
+      <div id="popup-img" className={ card.name ? 'popup-img popup popup_open' : 'popup-img popup'}>
+        <div className="popup-img__container">
+          <img className="popup-img__img" alt={createAltImg(card.name)} src={card.img} />
+          <p className="popup-img__title">{card.name}</p>
+          <button id="popup-img__close" className="popup__close" onClick={onClose}></button>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

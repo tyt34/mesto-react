@@ -1,8 +1,3 @@
-//import './App.css';
-//import logo from './images/logo.svg'
-//import profile__img from './images/load.gif'
-
-
 function Footer() {
   return (
       <footer className="footer">

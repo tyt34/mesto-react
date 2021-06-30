@@ -1,78 +1,13 @@
-//import './App.css';
 import logo from './images/logo.svg'
 import React from 'react'
 import PopupWithForm from './PopupWithForm.jsx'
 import Main from './Main.jsx'
-import Api from '../utils/Api'
-import Card from './Card.jsx'
 import ImagePopup from './ImagePopup.jsx'
-
-
-//import profile__img from './images/load.gif'
-//import profile__img from './images/logo.png'
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
-
-  const [cards, setCards] = React.useState([])
-
-  const [selectedCard, setSelectedCard] = React.useState(false)
-
-
-  React.useEffect( () => {
-    console.log(' MMMoount ')
-    Api.getCardsFromServer().then( data => {
-      console.log(data[0])
-      setCards(data)
-    })
-    //profile__img = userAvatar
-  }, [])
-
-  /*
-  React.useEffect( () => {
-    console.log(' MOUNT ')
-    const buttonAddOpen  = document.querySelector('.profile-char__add')
-    const buttonAvatar  = document.querySelector('.profile__edit')
-    const buttonEditOpen  = document.querySelector('.profile-char__edit')
-
-    buttonEditOpen.addEventListener('click', () => {
-      console.log(' but 3')
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          //console.log(' - - - > ');
-          //document.getElementById('popup-edit').classList.remove('popup_open')
-          closeAllPopups()
-        }
-      })
-      document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('popup_open')) {
-          //document.getElementById('popup-edit').classList.remove('popup_open')
-          closeAllPopups()
-        }
-      })
-    })
-
-    buttonAvatar.addEventListener('click', () => {
-      console.log(' but 2')
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          //console.log(' - - - > ');
-          closeAllPopups()
-          //document.getElementById('popup-avatar').classList.remove('popup_open')
-        }
-      })
-      document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('popup_open')) {
-          closeAllPopups()
-          //document.getElementById('popup-avatar').classList.remove('popup_open')
-        }
-      })
-    })
-
-  })
-  */
 
   function handleEditAvatarClick() {
     console.log(' -1- ')
@@ -93,19 +28,7 @@ function App() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
-
-    setSelectedCard(false)
   }
-
-  function handleCardClick() {
-    setSelectedCard(true)
-  }
-
-  /*
-  <ul className="...">
-          {cards.map((card) => <Card key={card._id} card={card} onCardClick={....} />)}
-  </ul>
-  */
 
   return (
     <>
@@ -117,21 +40,11 @@ function App() {
         </div>
       </div>
 
-
-
       <Main
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
       />
-
-      <section className="places">
-        {
-          cards.map( (card) => <Card key={card._id} name={card.name} img={card.link} likes={card.likes}  />)
-        }
-      </section>
-
-      <ImagePopup isOpen={selectedCard} onClose={closeAllPopups} />
 
       <PopupWithForm
         name={'avatar'}
@@ -169,7 +82,6 @@ function App() {
         <input id="popup-add-link" className="popup__input" name="link" type="url" placeholder="Ссылка на картинку" required />
         <span id="popup-add-link-error" className="popup__error"></span>
       </PopupWithForm>
-
     </>
   )
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import Header from './components/Header.jsx'
 import App from './components/App.jsx'
-import Main from './components/Main.jsx'
+//import Main from './components/Main.jsx'
 import Footer from './components/Footer.jsx'
 import reportWebVitals from './reportWebVitals'
 
