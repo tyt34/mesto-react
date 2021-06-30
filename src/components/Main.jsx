@@ -1,14 +1,14 @@
-import profile__img from './images/load.gif'
+import profileImg from '../images/load.gif' // переменная должна быть в camelCase
 import React from 'react'
 import Api from '../utils/Api'
 import Card from './Card.jsx'
 
-
-
 function Main(props) {
+  //console.log(' Main ',props)
+  //console.log(handleClick)
   const [userName, setUserName] = React.useState('Загрузка...')
   const [userDescription, setUserDescription] = React.useState('Загрузка...')
-  const [userAvatar, setUserAvatar] = React.useState(profile__img)
+  const [userAvatar, setUserAvatar] = React.useState(profileImg)
   const [cards, setCards] = React.useState([])
 
   React.useEffect( () => {
@@ -16,12 +16,18 @@ function Main(props) {
       setUserName(data.name)
       setUserDescription(data.about)
       setUserAvatar(data.avatar)
-    })
+    }).catch(
+      (err) => console.log(err)
+    )
 
     Api.getCardsFromServer().then( data => {
       setCards(data)
-    })
+    }).catch(
+      (err) => console.log(err)
+    )
   }, [])
+
+  //console.log(props.onCardClick);
 
   return (
       <main>
@@ -62,8 +68,15 @@ function Main(props) {
 
         <section className="places">
           {
-            cards.map( (card) => <Card key={card._id} name={card.name} img={card.link} likes={card.likes}  />)
-          }
+            cards.map( (card) => (<Card
+                                    key={card._id}
+                                    name={card.name}
+                                    img={card.link}
+                                    likes={card.likes}
+                                    onCardClick={props.onCardClick}
+                                  />)
+            )
+          } {/*// любой JSX нужно оборачивать в круглые скобки*/}
         </section>
     </main>
   )

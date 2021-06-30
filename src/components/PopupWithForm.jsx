@@ -1,7 +1,7 @@
 import React from 'react'
 
 function PopupWithForm(props) {
-  
+
   return (
     <div id={`popup-${props.name}`} className={ props.isOpen ? 'popup popup_open' : 'popup'}>
       <div className={`popup-${props.name}__container popup__container`}>
@@ -9,9 +9,10 @@ function PopupWithForm(props) {
         <p className={`popup-${props.name}__title`}>
           {`${props.textTitle}`}
         </p>
-        <form noValidate name={`${props.name}`} className={`popup-${props.name}__form popup__form`} action="index.html" method="post">
+        <form name={`${props.name}`} className={`popup-${props.name}__form popup__form`} action="index.html" method="post">
 
-          {props.children && <>{props.children}</>}
+          {/*{props.children && <>{props.children}</>}*/} {/*можно проще*/}
+          {props.children}
 
           <button id={`popup-${props.name}__save`} className={`popup__save`} type="submit">
             {`${props.textButton}`}

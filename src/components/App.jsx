@@ -1,4 +1,4 @@
-import logo from './images/logo.svg'
+//import logo from '../images/logo.svg'
 import React from 'react'
 import PopupWithForm from './PopupWithForm.jsx'
 import Main from './Main.jsx'
@@ -8,6 +8,11 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
+
+  const [selectedCard, setSelectedCard] = React.useState({
+    name: '',
+    img: '',
+  })
 
   function handleEditAvatarClick() {
     console.log(' -1- ')
@@ -24,26 +29,44 @@ function App() {
     setAddPlacePopupOpen(true)
   }
 
+  function handleCardClick() {
+    console.log(' - - - - > ')
+    //console.log(onCardClick)
+    setSelectedCard({
+      name: 'Среда, мои чуваки',
+      img: 'https://i.pinimg.com/736x/51/1e/46/511e4629ff0630293470b648e3da938e--smooch-kiss-amphibians.jpg',
+    })
+  }
+
   function closeAllPopups() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
+
+    setSelectedCard({
+      name: '',
+      img: '',
+    })
   }
+
+  /*function handleClick() { // как заставить эту функцию получать объект?
+    console.log(' ---> ')
+    //console.log(props)
+
+  //  setSelectedCard({
+  //    name: props.name,
+  //    img: props.img,
+    //})
+
+  }*/
 
   return (
     <>
-      <div id="popup-img" className="popup-img popup">
-        <div className="popup-img__container">
-          <img className="popup-img__img" src={logo} alt="Test" />
-          <p className="popup-img__title">Test</p>
-          <button id="popup-img__close" className="popup__close"></button>
-        </div>
-      </div>
-
       <Main
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
       />
 
       <PopupWithForm
@@ -82,6 +105,8 @@ function App() {
         <input id="popup-add-link" className="popup__input" name="link" type="url" placeholder="Ссылка на картинку" required />
         <span id="popup-add-link-error" className="popup__error"></span>
       </PopupWithForm>
+
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </>
   )
 }
