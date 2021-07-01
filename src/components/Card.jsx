@@ -9,12 +9,12 @@ function Card(props) {
   }
 
   function handleClick() {
-    console.log(' -> ')
-    console.log(props)
+    //console.log(' -> ')
+    //console.log(props)
 
     props.onCardClick(props)
-    console.log(' - - > ',props.onCardClick)
-    console.log(' - - - > ',props.onCardClick())
+    //console.log(' - - > ',props.onCardClick)
+    //console.log(' - - - > ',props.onCardClick())
     /*
     setSelectedCard({
       name: props.name,

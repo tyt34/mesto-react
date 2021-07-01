@@ -29,12 +29,12 @@ function App() {
     setAddPlacePopupOpen(true)
   }
 
-  function handleCardClick() {
+  function handleCardClick(props) {
     console.log(' - - - - > ')
-    //console.log(onCardClick)
+    console.log(' = = = => ', props)
     setSelectedCard({
-      name: 'Среда, мои чуваки',
-      img: 'https://i.pinimg.com/736x/51/1e/46/511e4629ff0630293470b648e3da938e--smooch-kiss-amphibians.jpg',
+      name: props.name,
+      img: props.img,
     })
   }
 
