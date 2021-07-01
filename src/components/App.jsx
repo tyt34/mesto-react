@@ -49,17 +49,6 @@ function App() {
     })
   }
 
-  /*function handleClick() { // как заставить эту функцию получать объект?
-    console.log(' ---> ')
-    //console.log(props)
-
-  //  setSelectedCard({
-  //    name: props.name,
-  //    img: props.img,
-    //})
-
-  }*/
-
   return (
     <>
       <Main

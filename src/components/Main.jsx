@@ -4,8 +4,6 @@ import Api from '../utils/Api'
 import Card from './Card.jsx'
 
 function Main(props) {
-  //console.log(' Main ',props)
-  //console.log(handleClick)
   const [userName, setUserName] = React.useState('Загрузка...')
   const [userDescription, setUserDescription] = React.useState('Загрузка...')
   const [userAvatar, setUserAvatar] = React.useState(profileImg)
@@ -26,8 +24,6 @@ function Main(props) {
       (err) => console.log(err)
     )
   }, [])
-
-  //console.log(props.onCardClick);
 
   return (
       <main>
