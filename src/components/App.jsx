@@ -3,8 +3,17 @@ import React from 'react'
 import PopupWithForm from './PopupWithForm.jsx'
 import Main from './Main.jsx'
 import ImagePopup from './ImagePopup.jsx'
+import Api from '../utils/Api'
+import profileImg from '../images/load.gif' // переменная должна быть в camelCase
+import CurrentUserContext from '../contexts/CurrentUserContext'
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({
+    name: 'Загрузка...',
+    about: 'Загрузка...',
+    avatar: profileImg
+  })
+
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
@@ -13,6 +22,27 @@ function App() {
     name: '',
     img: '',
   })
+
+  React.useEffect( () => {
+    console.log(' mount ');
+    Api.getNowData().then( data => {
+      //console.log(data)
+      setCurrentUser({
+        name: data.name,
+        about: data.about,
+        avatar: data.avatar
+      })
+      //console.log(currentUser)
+      /*
+      setUserName(data.name)
+      setUserDescription(data.about)
+      setUserAvatar(data.avatar)
+      */
+    }).catch(
+      (err) => console.log(err)
+    )
+    //console.log(currentUser)
+  }, [])
 
   function handleEditAvatarClick() {
     console.log(' -1- ')
@@ -50,7 +80,7 @@ function App() {
   }
 
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       <Main
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
@@ -96,7 +126,7 @@ function App() {
       </PopupWithForm>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-    </>
+    </CurrentUserContext.Provider>
   )
 }
 
