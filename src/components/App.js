@@ -1,12 +1,12 @@
 import React from 'react'
-import Main from './Main.jsx'
-import ImagePopup from './ImagePopup.jsx'
+import Main from './Main'
+import ImagePopup from './ImagePopup'
 import Api from '../utils/Api'
 import profileImg from '../images/load.gif' // переменная должна быть в camelCase
 import CurrentUserContext from '../contexts/CurrentUserContext'
-import EditProfilePopup from './EditProfilePopup.jsx'
-import EditAvatarPopup from './EditAvatarPopup.jsx'
-import AddPlacePopup from './AddPlacePopup.jsx'
+import EditProfilePopup from './EditProfilePopup'
+import EditAvatarPopup from './EditAvatarPopup'
+import AddPlacePopup from './AddPlacePopup'
 
 
 function App() {
