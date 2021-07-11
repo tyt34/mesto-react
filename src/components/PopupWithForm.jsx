@@ -9,7 +9,7 @@ function PopupWithForm(props) {
         <p className={`popup-${props.name}__title`}>
           {`${props.textTitle}`}
         </p>
-        <form name={`${props.name}`} className={`popup-${props.name}__form popup__form`} action="index.html" method="post">
+        <form onSubmit={props.onSubmit} name={`${props.name}`} className={`popup-${props.name}__form popup__form`} action="index.html" method="post">
 
           {/*{props.children && <>{props.children}</>}*/} {/*можно проще*/}
           {props.children}

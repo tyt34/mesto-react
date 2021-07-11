@@ -1,41 +1,16 @@
-import profileImg from '../images/load.gif' // переменная должна быть в camelCase
 import React from 'react'
-import Api from '../utils/Api'
 import Card from './Card.jsx'
 import CurrentUserContext from '../contexts/CurrentUserContext'
 
 function Main(props) {
-  //static
-  const currenUser = React.useContext(CurrentUserContext)
-  //console.log(' = = = > ',currenUser);
-
-  //const [userName, setUserName] = React.useState('Загрузка...')
-  //const [userDescription, setUserDescription] = React.useState('Загрузка...')
-  //const [userAvatar, setUserAvatar] = React.useState(profileImg)
-  const [cards, setCards] = React.useState([])
-
-  React.useEffect( () => {
-    /*
-    Api.getNowData().then( data => {
-      setUserName(data.name)
-      setUserDescription(data.about)
-      setUserAvatar(data.avatar)
-    }).catch(
-      (err) => console.log(err)
-    )
-    */
-    Api.getCardsFromServer().then( data => {
-      setCards(data)
-    }).catch(
-      (err) => console.log(err)
-    )
-  }, [])
+  //console.log(' main) ', props)
+  const currentUser = React.useContext(CurrentUserContext)
 
   return (
       <main>
         <section className="profile">
           <div className="profile__container">
-            <img className="profile__img" alt="Изображение профиля" src={currenUser.avatar} />
+            <img className="profile__img" alt="Изображение профиля" src={currentUser.avatar} />
             <div className="profile__overlay">
               <button
                 className="profile__edit"
@@ -48,7 +23,7 @@ function Main(props) {
             <div className="profile-char__discr">
               <div className="profile-char__info">
                 <h1 id="text-up" className="profile-char__title">
-                  {currenUser.name}
+                  {currentUser.name}
                 </h1>
                 <button
                   className="profile-char__edit"
@@ -57,7 +32,7 @@ function Main(props) {
                 </button>
               </div>
               <p id="text-dw" className="profile-char__subtitle">
-                {currenUser.about}
+                {currentUser.about}
               </p>
             </div>
             <button
@@ -70,13 +45,17 @@ function Main(props) {
 
         <section className="places">
           {
-            cards.map( (card) => (<Card
-                                    key={card._id}
-                                    name={card.name}
-                                    img={card.link}
-                                    likes={card.likes}
-                                    onCardClick={props.onCardClick}
-                                  />)
+            props.cards.map( (card) => (<Card
+              name={card.name}
+              img={card.link}
+              likes={card.likes}
+              key={card._id}
+              id={card._id}
+              onCardClick={props.onCardClick}
+              isOwn={card.owner}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
+              />)
             )
           } {/*// любой JSX нужно оборачивать в круглые скобки*/}
         </section>
@@ -84,4 +63,4 @@ function Main(props) {
   )
 }
 
-export default Main;
+export default Main
