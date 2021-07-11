@@ -1,7 +1,7 @@
 import React from 'react'
 import Main from './Main'
 import ImagePopup from './ImagePopup'
-import Api from '../utils/Api'
+import Api from '../utils/api'
 import profileImg from '../images/load.gif' // переменная должна быть в camelCase
 import CurrentUserContext from '../contexts/CurrentUserContext'
 import EditProfilePopup from './EditProfilePopup'
