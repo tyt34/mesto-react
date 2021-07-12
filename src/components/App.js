@@ -47,7 +47,7 @@ function App() {
     const isLiked = card.likes.some( (i) => {
       return i._id === currentUser._id
     })
-    let method
+    let method // не понимаю, как это еще можно сократить
     if (isLiked) {
       method = "DELETE"
     } else {
