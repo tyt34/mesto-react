@@ -1,17 +1,18 @@
-//import {option} from '../utils/constants.js';
+//import {options} from '../utils/constants.js';
 
-const option = {
+const options = {
   token: '54e47a58-a3be-4854-bdb0-d150680efc4c',
   cohortId: 'cohort-24',
-  myId: "34f519f4db31bcdefd2e9e7c"
+  myId: "34f519f4db31bcdefd2e9e7c",
+  url: 'https://mesto.nomoreparties.co',
 }
 
 class Api {
-  constructor(option) {
-    this._token = option.token
-    this._cohortId = option.cohortId
+  constructor(options) {
+    this._token = options.token
+    this._cohortId = options.cohortId
 
-    this._url = 'https://mesto.nomoreparties.co'
+    this._url = options.url
     this._me = '/v1/'+this._cohortId+'/users/me'
     this._ava = this._me+'/avatar'
     this._cards = '/v1/'+this._cohortId+'/cards'
@@ -25,7 +26,7 @@ class Api {
     return res.json()
   }
 
-  getNowData() {
+  getUserInfo() {
     return fetch(this._url+this._me, {
       headers: {
         authorization: this._token
@@ -103,9 +104,9 @@ class Api {
       )
   }
 
-  sendLike(id) {
+  changeLikeCardStatus(id, method) {
     return fetch(this._likes+id, {
-      method: 'PUT',
+      method: method,
       headers: {
         authorization: this._token
       }
@@ -113,7 +114,19 @@ class Api {
       (res) => this._getResponseData(res)
     )
   }
-
+  /*
+  sendLike(id, method) {
+    return fetch(this._likes+id, {
+      method: method, // 'PUT'
+      headers: {
+        authorization: this._token
+      }
+    }).then(
+      (res) => this._getResponseData(res)
+    )
+  }
+  */
+  /*
   sendDislike(id) {
     return fetch(this._likes+id, {
       method: 'DELETE',
@@ -124,7 +137,8 @@ class Api {
       (res) => this._getResponseData(res)
     )
   }
+  */
 }
 
-const api = new Api(option)
+const api = new Api(options)
 export default api

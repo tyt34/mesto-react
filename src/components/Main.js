@@ -3,7 +3,6 @@ import Card from './Card'
 import CurrentUserContext from '../contexts/CurrentUserContext'
 
 function Main(props) {
-  //console.log(' main) ', props)
   const currentUser = React.useContext(CurrentUserContext)
 
   return (
@@ -11,11 +10,14 @@ function Main(props) {
         <section className="profile">
           <div className="profile__container">
             <img className="profile__img" alt="Изображение профиля" src={currentUser.avatar} />
-            <div className="profile__overlay">
+            <div
+              onClick={props.onEditAvatar}
+              className="profile__overlay"
+            >
               <button
                 className="profile__edit"
                 type="button"
-                onClick={props.onEditAvatar}>
+              >
               </button>
             </div>
           </div>
