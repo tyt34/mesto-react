@@ -32,7 +32,7 @@ function App() {
       api.getCardsFromServer(),
       api.getUserInfo()
     ])
-    .then( (values) => { /* А тут можно сделать деструктуризацию??? */
+    .then( (values) => {
       setCards(values[0])
       setCurrentUser(values[1])
     })
@@ -42,6 +42,18 @@ function App() {
       }
     )
   }, [])
+
+  const closeOnEsc = (e) => { // насколько это правильно?
+    if (e.keyCode === 27) {
+      closeAllPopups()
+    }
+  }
+
+  const delPrevSpace = (e) => { // насколько это правильно?
+    if (e.keyCode === 32) {
+      e.preventDefault()
+    }
+  }
 
   function handleCardLikeDislike(card) {
     const isLiked = card.likes.some( (i) => {
@@ -75,14 +87,17 @@ function App() {
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true)
+    window.addEventListener('keydown', closeOnEsc)
   }
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true)
+    window.addEventListener('keydown', closeOnEsc)
   }
 
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true)
+    window.addEventListener('keydown', closeOnEsc)
   }
 
   function handleCardClick(props) {
@@ -90,6 +105,9 @@ function App() {
       name: props.name,
       img: props.img,
     })
+
+    window.addEventListener('keydown', closeOnEsc)
+    window.addEventListener('keydown', delPrevSpace)
   }
 
   function closeAllPopups() {
@@ -101,6 +119,9 @@ function App() {
       name: '',
       img: '',
     })
+
+    window.removeEventListener('keydown', closeOnEsc)
+    window.removeEventListener('keydown', delPrevSpace)
   }
 
   function handleAddPlaceSubmit(e) {
@@ -169,7 +190,11 @@ function App() {
         onClose={closeAllPopups}
       />
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+
+      />
     </CurrentUserContext.Provider>
   )
 }
