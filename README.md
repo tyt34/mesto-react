@@ -1,4 +1,4 @@
-# Проектная работа №4-9 (Яндекс.Практикум)
+# Проектная работа №10-11 (Яндекс.Практикум)
 ![](https://shields.io/badge/-HTML-orange) 
 ![](https://shields.io/badge/-CSS-blue)
 ![](https://shields.io/badge/-JavaScript-yellow)
