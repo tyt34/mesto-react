@@ -1,32 +1,8 @@
 import React from 'react'
-import { useEffect, useState } from "react";
 
 function ImagePopup( {card, onClose} ) {
-  useEffect(() => {
-    console.log(' start ')
-    /*
-    const close = (e) => {
-      //console.log(e)
-      if (e.keyCode === 27) {
-        console.log(' esc ')
-        onClose()
-      }
-      if (e.keyCode === 32) {
-        console.log(' space ')
-        e.preventDefault()
-      }
-    }
-    window.addEventListener('keydown', close)
-    return () => window.removeEventListener('keydown', close)
-    */
-  }, [])
-
   function createAltImg(specialWord) {
     return 'Изображение места: "'+specialWord+'"'
-  }
-
-  function click(e) {
-    console.log(' e ', e)
   }
 
   return (
@@ -49,8 +25,3 @@ function ImagePopup( {card, onClose} ) {
 }
 
 export default ImagePopup
-
-/*
-onKeyDown={ (e) => {console.log('e ', e)}}
-tabIndex="0"
-*/
